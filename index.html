@@ -1,1 +1,2297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RKS Studio - Quality mobile apps crafted by Ramyakant. Creator of TinyPix and TinyZip. Practical tools for everyday problems.">
+  <title>RKS Studio — Quality Apps by Ramyakant</title>
+  <meta name="description" content="RKS Studio - Indie app development venture creating quality mobile apps like TinyPix and TinyZip. Simple, privacy-focused tools for everyday tasks.">
+  <meta name="keywords" content="mobile apps, app development, TinyPix, TinyZip, image compression, archive manager, indie developer">
+  <meta name="author" content="Ramyakant">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rks-studio.github.io/">
+  <meta property="og:title" content="RKS Studio — Quality Apps by Ramyakant">
+  <meta property="og:description" content="Indie app development venture creating quality mobile apps. Simple, privacy-focused tools for everyday tasks.">
+  <meta property="og:image" content="https://rks-studio.github.io/og-image.svg">
+  <meta property="og:site_name" content="RKS Studio">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://rks-studio.github.io/">
+  <meta name="twitter:title" content="RKS Studio — Quality Apps by Ramyakant">
+  <meta name="twitter:description" content="Indie app development venture creating quality mobile apps. Simple, privacy-focused tools for everyday tasks.">
+  <meta name="twitter:image" content="https://rks-studio.github.io/og-image.svg">
+  
+  <!-- SEO Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "RKS Studio",
+    "description": "Indie app development venture creating quality mobile apps",
+    "url": "https://rks-studio.github.io/",
+    "logo": "https://rks-studio.github.io/logo.png",
+    "founder": {
+      "@type": "Person",
+      "name": "Ramyakant"
+    },
+    "sameAs": [
+      "https://github.com/rks-studio"
+    ],
+    "owns": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "TinyPix",
+        "applicationCategory": "PhotoApplication",
+        "operatingSystem": "Android",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "TinyZip",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Android",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    ]
+  }
+  </script>
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='25' cy='25' r='20' fill='%234CAF50'/%3E%3Ccircle cx='75' cy='25' r='20' fill='%232196F3'/%3E%3Ccircle cx='25' cy='75' r='20' fill='%23FF9800'/%3E%3Ccircle cx='75' cy='75' r='20' fill='%239C27B0'/%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #135BEC;
+      --primary-dark: #0D47A1;
+      --primary-light: #60A5FA;
+      --accent: #10B981;
+      --text-primary: #1A1C1E;
+      --text-secondary: #616161;
+      --text-muted: #9CA3AF;
+      --bg-body: #F8FAFC;
+      --bg-card: #ffffff;
+      --bg-elevated: #F1F5F9;
+      --border: #E2E8F0;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow: 0 4px 6px -1px rgba(19, 91, 236, 0.1), 0 2px 4px -2px rgba(19, 91, 236, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(19, 91, 236, 0.15), 0 4px 6px -4px rgba(19, 91, 236, 0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(19, 91, 236, 0.15), 0 8px 10px -6px rgba(19, 91, 236, 0.1);
+      --gradient-primary: linear-gradient(135deg, #135BEC 0%, #0D47A1 100%);
+      --gradient-accent: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
+    /* Dark Mode */
+    body.dark-mode {
+      --text-primary: #F8FAFC;
+      --text-secondary: #CBD5E1;
+      --text-muted: #64748B;
+      --bg-body: #0F172A;
+      --bg-card: #1E293B;
+      --bg-elevated: #334155;
+      --border: #334155;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-body);
+      color: var(--text-primary);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--primary);
+      color: white;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-body);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(248, 250, 252, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    body.dark-mode nav {
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 800;
+      font-size: 1.5rem;
+      z-index: 1001;
+    }
+
+    /* OPTION 1: Simple R in box - COMMENTED OUT
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.25rem;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(19, 91, 236, 0.3);
+    }
+    */
+
+    /* OPTION 2: Geometric R Monogram - COMMENTED OUT
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      position: relative;
+    }
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-primary);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(19, 91, 236, 0.3);
+    }
+    .logo-icon::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 24px;
+      border-left: 3px solid white;
+      border-top: 3px solid white;
+      border-bottom: 3px solid white;
+      border-radius: 10px 0 0 10px;
+    }
+    .logo-icon-inner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 12px solid white;
+      margin-left: 2px;
+      margin-top: 2px;
+    }
+    */
+
+    /* OPTION 3: 3D Glassmorphism Card - COMMENTED OUT
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, rgba(19, 91, 236, 0.8) 0%, rgba(13, 71, 161, 0.9) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+      position: relative;
+      box-shadow: 
+        0 8px 32px rgba(19, 91, 236, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      transform: perspective(500px) rotateY(-5deg) rotateX(5deg);
+      transition: var(--transition);
+    }
+    .logo-icon:hover {
+      transform: perspective(500px) rotateY(0deg) rotateX(0deg) translateY(-2px);
+      box-shadow: 
+        0 12px 40px rgba(19, 91, 236, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      right: 2px;
+      height: 50%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+      border-radius: 10px 10px 0 0;
+      pointer-events: none;
+    }
+    .logo-icon-inner {
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    */
+
+    /* OPTION 4: App Grid Icon */
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 4px;
+      padding: 4px;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+    }
+
+    .logo-icon:hover {
+      transform: scale(1.05);
+      border-color: var(--primary);
+      box-shadow: 0 6px 20px rgba(19, 91, 236, 0.2);
+    }
+
+    .logo-icon-inner {
+      border-radius: 6px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo-icon-inner:nth-child(1) {
+      background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+    }
+
+    .logo-icon-inner:nth-child(2) {
+      background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    }
+
+    .logo-icon-inner:nth-child(3) {
+      background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+    }
+
+    .logo-icon-inner:nth-child(4) {
+      background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-text-rks {
+      font-size: 1.25rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-text-studio {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    /* Desktop Navigation */
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .desktop-nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .desktop-nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .desktop-nav a:hover {
+      color: var(--primary);
+    }
+
+    .desktop-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: width 0.3s ease;
+    }
+
+    .desktop-nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Desktop Theme Toggle */
+    .theme-toggle-desktop {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-toggle-desktop:hover {
+      transform: scale(1.1) rotate(15deg);
+      border-color: var(--primary);
+      background: var(--bg-card);
+    }
+
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 1001;
+    }
+
+    /* Mobile Menu Overlay */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg-body);
+      z-index: 999;
+      flex-direction: column;
+      padding: 5rem 2rem 2rem;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+      text-align: center;
+      padding-top: 2rem;
+    }
+
+    .mobile-menu a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .mobile-menu a:hover {
+      color: var(--primary);
+    }
+
+    /* Mobile Theme Toggle */
+    .mobile-theme-toggle {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 2px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      cursor: pointer;
+    }
+
+    .theme-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-elevated);
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      transition: var(--transition);
+    }
+
+    .theme-icon:hover {
+      border-color: var(--primary);
+      transform: scale(1.1);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: 0;
+      width: min(600px, 80vw);
+      height: min(600px, 80vw);
+      background: radial-gradient(circle, rgba(19, 91, 236, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 20s ease-in-out infinite;
+      transform: translateX(20%);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: 0;
+      width: min(400px, 60vw);
+      height: min(400px, 60vw);
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 15s ease-in-out infinite reverse;
+      transform: translateX(-10%);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(15px, -15px) scale(1.05); }
+    }
+
+    .hero-content {
+      max-width: 900px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .studio-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .studio-badge .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-logo-icon {
+      width: 80px;
+      height: 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 6px;
+      padding: 8px;
+      background: var(--bg-card);
+      border: 3px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      /* animation: floatIcon 6s ease-in-out infinite; */
+    }
+
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+    }
+
+    .hero-logo-icon-inner {
+      border-radius: 15px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-logo-icon-inner:nth-child(1) {
+      background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+    }
+
+    .hero-logo-icon-inner:nth-child(2) {
+      background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    }
+
+    .hero-logo-icon-inner:nth-child(3) {
+      background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+    }
+
+    .hero-logo-icon-inner:nth-child(4) {
+      background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+    }
+
+    .hero-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      text-align: left;
+    }
+
+    .hero-logo-rks {
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -2px;
+    }
+
+    .hero-logo-studio {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 8px;
+      white-space: nowrap;
+    }
+
+    .hero-badge {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .hero-badge .badge-main {
+      color: var(--text-muted);
+    }
+
+    .hero-badge .badge-name {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .hero-description {
+      font-size: 1.35rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 2.5rem auto 1rem;
+      line-height: 1.5;
+    }
+
+    .hero-location {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.75rem;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+      box-shadow: 0 4px 14px rgba(19, 91, 236, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(19, 91, 236, 0.5);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 2px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    /* Section Styles */
+    section {
+      padding: 5rem 2rem;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* 4K / Large Desktop Screens */
+    @media (min-width: 1920px) {
+      .container {
+        max-width: 1800px;
+      }
+
+      .nav-container {
+        max-width: 1800px;
+        padding: 1.5rem 3rem;
+      }
+
+      .logo-icon {
+        width: 50px;
+        height: 50px;
+        gap: 5px;
+        padding: 5px;
+      }
+
+      .desktop-nav ul {
+        gap: 3rem;
+      }
+
+      .hero {
+        padding-top: 8rem;
+      }
+
+      .hero-logo {
+        gap: 2rem;
+      }
+
+      .hero-logo-icon {
+        width: 100px;
+        height: 100px;
+        gap: 8px;
+        padding: 10px;
+        border-radius: 24px;
+      }
+
+      .hero-logo-rks {
+        font-size: 4rem;
+      }
+
+      .hero-logo-studio {
+        font-size: 2rem;
+        letter-spacing: 4px;
+      }
+
+      .hero-badge {
+        font-size: 1rem;
+        margin-top: 0.75rem;
+      }
+
+      .hero-description {
+        font-size: 1.4rem;
+        max-width: 700px;
+        margin-top: 2.5rem;
+      }
+
+      .hero-location {
+        font-size: 1rem;
+      }
+
+      .btn {
+        padding: 0.9rem 1.8rem;
+        font-size: 1rem;
+      }
+
+      section {
+        padding: 5rem 3rem;
+      }
+
+      .section-header h2 {
+        font-size: 2.5rem;
+      }
+
+      .section-header p {
+        font-size: 1.2rem;
+      }
+
+      .apps-grid {
+        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+        gap: 2.5rem;
+      }
+
+      .app-icon {
+        width: 90px;
+        height: 90px;
+      }
+
+      .timeline::before {
+        width: 3px;
+      }
+
+      .timeline-content {
+        max-width: 420px;
+        padding: 1.8rem;
+      }
+
+      .contact h2 {
+        font-size: 3rem;
+      }
+
+      .contact p {
+        font-size: 1.2rem;
+      }
+    }
+
+    /* Ultra-wide 4K+ Screens */
+    @media (min-width: 2560px) {
+      .container {
+        max-width: 2200px;
+      }
+
+      .nav-container {
+        max-width: 2200px;
+        padding: 2rem 4rem;
+      }
+
+      .hero-logo-icon {
+        width: 120px;
+        height: 120px;
+        gap: 10px;
+        padding: 12px;
+        border-radius: 28px;
+      }
+
+      .hero-logo-rks {
+        font-size: 5rem;
+      }
+
+      .hero-logo-studio {
+        font-size: 2.5rem;
+        letter-spacing: 10px;
+      }
+
+      .hero-description {
+        font-size: 1.6rem;
+        max-width: 800px;
+      }
+
+      section {
+        padding: 6rem 4rem;
+      }
+
+      .section-header h2 {
+        font-size: 2.8rem;
+      }
+
+      .apps-grid {
+        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        gap: 3rem;
+      }
+
+      .app-icon {
+        width: 100px;
+        height: 100px;
+      }
+
+      .timeline-content {
+        max-width: 480px;
+        padding: 2rem;
+      }
+
+      .contact h2 {
+        font-size: 3.5rem;
+      }
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-header p {
+      color: var(--text-secondary);
+      font-size: 1.125rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* About Section */
+    .about {
+      background: var(--bg-elevated);
+    }
+
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-badge {
+      display: inline-block;
+      background: var(--gradient-primary);
+      color: white;
+      padding: 0.5rem 1.25rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .about-story {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .about-story h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .about-story p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .about-story p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Apps Section */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .app-card {
+      background: var(--bg-card);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary);
+    }
+
+    .app-header {
+      padding: 2rem 2rem 1rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .app-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      flex-shrink: 0;
+    }
+
+    .app-icon.tinypix {
+      background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+    }
+
+    .app-icon.tinyzip {
+      background: linear-gradient(135deg, #135BEC 0%, #0D47A1 100%);
+    }
+
+    .app-title h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .app-title span {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .app-body {
+      padding: 0 2rem 1.5rem;
+      flex: 1;
+    }
+
+    .app-body p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .app-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .app-feature {
+      background: var(--bg-elevated);
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .app-footer {
+      padding: 1.5rem 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 1rem;
+    }
+
+    .app-footer .btn {
+      flex: 1;
+      justify-content: center;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 640px) {
+      .apps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .app-footer {
+        flex-direction: column;
+      }
+
+      .app-footer .btn {
+        width: 100%;
+        padding: 0.9rem 1rem;
+      }
+    }
+
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-100px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal-left.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(100px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal-right.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal-scale.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .reveal-rotate {
+      opacity: 0;
+      transform: rotate(-10deg) translateY(40px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal-rotate.active {
+      opacity: 1;
+      transform: rotate(0) translateY(0);
+    }
+
+    /* Stagger delays */
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* Social Sharing Buttons */
+    .social-share {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem 2rem 0;
+      border-top: 1px solid var(--border);
+      align-items: center;
+    }
+
+    .social-share-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-right: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .social-share-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .social-share-btn:hover {
+      transform: translateY(-3px) scale(1.1);
+    }
+
+    .social-share-btn.twitter {
+      background: #1da1f2;
+    }
+
+    .social-share-btn.linkedin {
+      background: #0077b5;
+    }
+
+    .social-share-btn.facebook {
+      background: #1877f2;
+    }
+
+    .social-share-btn.whatsapp {
+      background: #25d366;
+    }
+
+    @media (max-width: 640px) {
+      .social-share {
+        justify-content: center;
+      }
+    }
+
+    /* Skills Section */
+    .skills {
+      background: var(--bg-elevated);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .skill-category {
+      background: var(--bg-card);
+      padding: 1.5rem;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    /* Slower reveal for skill cards */
+    .skill-category.reveal-scale {
+      transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .skill-category:hover {
+      box-shadow: var(--shadow);
+      border-color: var(--primary);
+    }
+
+    .skill-category h4 {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .skill-category h4 i {
+      font-size: 1.25rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      background: var(--bg-elevated);
+      padding: 0.4rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .skill-tag:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Timeline Section */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: var(--gradient-primary);
+      opacity: 0.3;
+    }
+
+    .timeline-item {
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 50%;
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .timeline-item:nth-child(even) {
+      justify-content: flex-start;
+      padding-right: 0;
+      padding-left: 50%;
+    }
+
+    .timeline-content {
+      background: var(--bg-card);
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      max-width: 350px;
+      position: relative;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    /* Slower reveal for timeline cards */
+    .timeline-content.reveal-left,
+    .timeline-content.reveal-right {
+      transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Add gap between cards and timeline */
+    @media (min-width: 769px) {
+      .timeline-item:nth-child(odd) .timeline-content {
+        margin-right: 2rem;
+      }
+
+      .timeline-item:nth-child(even) .timeline-content {
+        margin-left: 2rem;
+      }
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 16px;
+      background: var(--primary);
+      border-radius: 50%;
+      border: 4px solid var(--bg-body);
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+
+    .timeline-year {
+      display: inline-block;
+      background: var(--gradient-primary);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Philosophy Section */
+    .philosophy {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .philosophy-item {
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .philosophy-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--bg-elevated);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+
+    .philosophy-item h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .philosophy-item p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* Contact Section */
+    .contact {
+      background: var(--gradient-primary);
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .contact .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact p {
+      opacity: 0.9;
+      font-size: 1.125rem;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      padding: 0.875rem 1.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: var(--transition);
+    }
+
+    .contact-link:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    footer p {
+      margin-bottom: 0.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition);
+      border: 1px solid var(--border);
+    }
+
+    .social-link:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .desktop-nav {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .timeline-content {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+        padding-left: 50px;
+        padding-right: 0;
+        justify-content: flex-start;
+      }
+
+      .timeline-content {
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .timeline-dot {
+        left: 20px;
+        transform: translateX(-50%);
+      }
+
+      .apps-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      section {
+        padding: 3rem 1rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Reduce reveal distance on mobile to prevent overflow */
+      .reveal-left {
+        transform: translateX(-30px);
+      }
+
+      .reveal-right {
+        transform: translateX(30px);
+      }
+
+      .hero {
+        padding: 5rem 1rem 3rem;
+      }
+    }
+
+    /* Particle Field Canvas */
+    .hero-particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-icon">
+          <div class="logo-icon-inner"></div>
+          <div class="logo-icon-inner"></div>
+          <div class="logo-icon-inner"></div>
+          <div class="logo-icon-inner"></div>
+        </div>
+        <div class="logo-text">
+          <span class="logo-text-rks">RKS</span>
+          <span class="logo-text-studio">STUDIO</span>
+        </div>
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <div class="desktop-nav">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#apps">Apps</a></li>
+          <li><a href="#philosophy">Philosophy</a></li>
+          <li><a href="#journey">Journey</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle-desktop" id="themeToggleDesktop" title="Toggle Dark Mode">
+          🌙
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#apps">Apps</a></li>
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="mobile-theme-toggle" id="themeToggleMobile">
+      <div class="theme-icon" id="themeIconMobile">🌙</div>
+      <span class="mobile-theme-toggle-text"></span>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <!-- Particle Field Background -->
+    <canvas class="hero-particles" id="particleCanvas"></canvas>
+    <div class="hero-content">
+      <h1 class="hero-logo reveal-scale">
+        <div class="hero-logo-icon">
+          <div class="hero-logo-icon-inner"></div>
+          <div class="hero-logo-icon-inner"></div>
+          <div class="hero-logo-icon-inner"></div>
+          <div class="hero-logo-icon-inner"></div>
+        </div>
+        <div class="hero-logo-text">
+          <span class="hero-logo-rks">RKS</span>
+          <span class="hero-logo-studio">STUDIO</span>
+        </div>
+      </h1>
+      <div class="studio-badge hero-badge reveal reveal-delay-1">
+        <span class="dot"></span>
+        <span class="badge-main">Indie App Studio By</span>
+        <span class="badge-name">Ramyakant</span>
+      </div>
+      <p class="hero-description reveal reveal-delay-2">
+        Quality mobile apps crafted with attention to detail
+      </p>
+      <div class="hero-location reveal reveal-delay-3">
+        <i class="fas fa-map-marker-alt"></i>
+        Poland <i class="fas fa-globe" style="margin: 0 0.25rem;"></i> Worldwide
+      </div>
+      <div class="hero-cta reveal reveal-delay-4">
+        <a href="#apps" class="btn btn-primary">
+          <i class="fas fa-rocket"></i>
+          Explore Apps
+        </a>
+        <a href="#about" class="btn btn-secondary">
+          <i class="fas fa-info-circle"></i>
+          Our Story
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>About RKS Studio</h2>
+        <p>Building practical tools that solve real everyday problems</p>
+      </div>
+      <div class="about-content">
+        <span class="about-badge reveal-scale">The Story Behind The Studio</span>
+        <p class="about-text reveal">
+          RKS Studio is an indie app development venture focused on creating simple, powerful tools for everyday tasks. 
+          We believe great software doesn't need to be complicated — it just needs to work.
+        </p>
+        <div class="about-story reveal">
+          <h3>🎯 Our Mission</h3>
+          <p>
+            Every app we build starts with a simple question: <em>"What problem can we solve today?"</em>
+          </p>
+          <p>
+            From compressing images to managing archives, we focus on the small but important tasks that people deal with daily. 
+            No bloat, no unnecessary features — just clean, functional tools that respect your time and privacy.
+          </p>
+          <p>
+            Founded by a developer with 8+ years of experience building enterprise web applications, 
+            RKS Studio brings professional-grade quality to consumer mobile apps.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Apps Section -->
+  <section id="apps">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Our Apps</h2>
+        <p>Practical tools crafted with care</p>
+      </div>
+      <div class="apps-grid">
+        <!-- TinyPix -->
+        <div class="app-card reveal-left reveal-delay-1">
+          <div class="app-header">
+            <div class="app-icon tinypix">🖼️</div>
+            <div class="app-title">
+              <h3>TinyPix</h3>
+              <span>Image Compression Tool</span>
+            </div>
+          </div>
+          <div class="app-body">
+            <p>Compress, convert, and resize your images with one tap. Perfect for saving storage and sharing photos faster. Features batch processing, format conversion, and compression history.</p>
+            <div class="app-features">
+              <span class="app-feature">Batch Compress</span>
+              <span class="app-feature">Format Convert</span>
+              <span class="app-feature">History</span>
+              <span class="app-feature">Flutter</span>
+            </div>
+          </div>
+          <div class="app-footer">
+            <a href="https://play.google.com/store/apps/details?id=com.ramyakant.tinypix" class="btn btn-primary" target="_blank">
+              <i class="fab fa-google-play"></i>
+              Get it on Play Store
+            </a>
+            <a href="https://rks-studio.github.io/apps/tinypix/privacy.html" class="btn btn-secondary">
+              <i class="fas fa-shield-alt"></i>
+              Privacy
+            </a>
+          </div>
+          <div class="social-share">
+            <span class="social-share-label">Share:</span>
+            <a href="https://twitter.com/intent/tweet?text=Check%20out%20TinyPix%20-%20a%20simple%20image%20compression%20app%20by%20RKS%20Studio!&url=https://play.google.com/store/apps/details?id=com.ramyakant.tinypix" class="social-share-btn twitter" target="_blank" title="Share on Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://play.google.com/store/apps/details?id=com.ramyakant.tinypix" class="social-share-btn linkedin" target="_blank" title="Share on LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://play.google.com/store/apps/details?id=com.ramyakant.tinypix" class="social-share-btn facebook" target="_blank" title="Share on Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://wa.me/?text=Check%20out%20TinyPix%20-%20a%20simple%20image%20compression%20app!%20https://play.google.com/store/apps/details?id=com.ramyakant.tinypix" class="social-share-btn whatsapp" target="_blank" title="Share on WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- TinyZip -->
+        <div class="app-card reveal-right reveal-delay-2">
+          <div class="app-header">
+            <div class="app-icon tinyzip">📦</div>
+            <div class="app-title">
+              <h3>TinyZip</h3>
+              <span>Archive Manager</span>
+            </div>
+          </div>
+          <div class="app-body">
+            <p>Create and manage ZIP archives on your mobile device. Extract files, compress folders, and share archives easily. Premium features include cloud storage integration and advanced compression.</p>
+            <div class="app-features">
+              <span class="app-feature">Create ZIP</span>
+              <span class="app-feature">Extract</span>
+              <span class="app-feature">Cloud Sync</span>
+              <span class="app-feature">Freemium</span>
+            </div>
+          </div>
+          <div class="app-footer">
+            <a href="https://play.google.com/store/apps/details?id=com.ramyakant.tinyzip" class="btn btn-primary" target="_blank">
+              <i class="fab fa-google-play"></i>
+              Get it on Play Store
+            </a>
+            <a href="https://rks-studio.github.io/apps/tinyzip/privacy.html" class="btn btn-secondary">
+              <i class="fas fa-shield-alt"></i>
+              Privacy
+            </a>
+          </div>
+          <div class="social-share">
+            <span class="social-share-label">Share:</span>
+            <a href="https://twitter.com/intent/tweet?text=Check%20out%20TinyZip%20-%20a%20simple%20archive%20manager%20app%20by%20RKS%20Studio!&url=https://play.google.com/store/apps/details?id=com.ramyakant.tinyzip" class="social-share-btn twitter" target="_blank" title="Share on Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://play.google.com/store/apps/details?id=com.ramyakant.tinyzip" class="social-share-btn linkedin" target="_blank" title="Share on LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://play.google.com/store/apps/details?id=com.ramyakant.tinyzip" class="social-share-btn facebook" target="_blank" title="Share on Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://wa.me/?text=Check%20out%20TinyZip%20-%20a%20simple%20archive%20manager%20app!%20https://play.google.com/store/apps/details?id=com.ramyakant.tinyzip" class="social-share-btn whatsapp" target="_blank" title="Share on WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy Section -->
+  <section class="philosophy" id="philosophy">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Our Philosophy</h2>
+        <p>How we approach every product</p>
+      </div>
+      <div class="philosophy-grid">
+        <div class="philosophy-item reveal-scale reveal-delay-1">
+          <div class="philosophy-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3>Simple & Fast</h3>
+          <p>No learning curve. Open the app, get the job done, move on with your day.</p>
+        </div>
+        <div class="philosophy-item reveal-scale reveal-delay-2">
+          <div class="philosophy-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Privacy First</h3>
+          <p>Your data stays on your device. We don't upload your files to any servers.</p>
+        </div>
+        <div class="philosophy-item reveal-scale reveal-delay-3">
+          <div class="philosophy-icon">
+            <i class="fas fa-paint-brush"></i>
+          </div>
+          <h3>Thoughtful Design</h3>
+          <p>Every pixel, every interaction is crafted to feel intuitive and polished.</p>
+        </div>
+        <div class="philosophy-item reveal-scale reveal-delay-4">
+          <div class="philosophy-icon">
+            <i class="fas fa-sync-alt"></i>
+          </div>
+          <h3>Always Improving</h3>
+          <p>Continuous updates based on user feedback and emerging needs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Journey Section -->
+  <section id="journey">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>The Studio's Journey</h2>
+        <p>Where we are and where we're headed</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content reveal-left reveal-delay-1">
+            <span class="timeline-year">Late 2025</span>
+            <div class="timeline-title">Studio Founded</div>
+            <div class="timeline-desc">RKS Studio was born with a clear mission: build simple, privacy-focused tools that solve everyday problems without unnecessary complexity.</div>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content reveal-right reveal-delay-2">
+            <span class="timeline-year">Early 2026</span>
+            <div class="timeline-title">TinyPix Launched</div>
+            <div class="timeline-desc">Our first app hit the Play Store. An image compression tool built with enterprise-grade quality and consumer simplicity in mind.</div>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content reveal-left reveal-delay-3">
+            <span class="timeline-year">April 2026</span>
+            <div class="timeline-title">TinyZip in Closed Testing</div>
+            <div class="timeline-desc">Currently testing our second app — an archive manager with premium features. Applying everything we learned from TinyPix.</div>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content reveal-right reveal-delay-4">
+            <span class="timeline-year">Coming Soon</span>
+            <div class="timeline-title">The Road Ahead</div>
+            <div class="timeline-desc">Exploring PDF tools, video compression, local music player, and other utility apps. Focused on sustainable growth through subscription models.</div>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Technical Expertise</h2>
+        <p>The tech stack behind our apps</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-category reveal-scale reveal-delay-1">
+          <h4><i class="fas fa-mobile-alt"></i> Mobile Development</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Flutter</span>
+            <span class="skill-tag">Dart</span>
+            <span class="skill-tag">Android</span>
+            <span class="skill-tag">Google Play</span>
+            <span class="skill-tag">Firebase</span>
+          </div>
+        </div>
+        <div class="skill-category reveal-scale reveal-delay-2">
+          <h4><i class="fab fa-php"></i> Backend & APIs</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">PHP 8</span>
+            <span class="skill-tag">Laravel</span>
+            <span class="skill-tag">Symfony</span>
+            <span class="skill-tag">Pimcore</span>
+            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">GraphQL</span>
+          </div>
+        </div>
+        <div class="skill-category reveal-scale reveal-delay-3">
+          <h4><i class="fas fa-database"></i> Data & Storage</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">Redis</span>
+            <span class="skill-tag">Hive</span>
+            <span class="skill-tag">Local Storage</span>
+          </div>
+        </div>
+        <div class="skill-category reveal-scale reveal-delay-2">
+          <h4><i class="fas fa-code"></i> Frontend</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">Tailwind CSS</span>
+            <span class="skill-tag">jQuery</span>
+            <span class="skill-tag">Twig</span>
+          </div>
+        </div>
+        <div class="skill-category reveal-scale reveal-delay-3">
+          <h4><i class="fas fa-tools"></i> DevOps & Tools</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Bitbucket</span>
+            <span class="skill-tag">Linux</span>
+            <span class="skill-tag">Composer</span>
+          </div>
+        </div>
+        <div class="skill-category reveal-scale reveal-delay-4">
+          <h4><i class="fas fa-tasks"></i> Project Management</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Jira</span>
+            <span class="skill-tag">Asana</span>
+            <span class="skill-tag">Zoho Projects</span>
+            <span class="skill-tag">Agile</span>
+            <span class="skill-tag">Remote Work</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="reveal">Let's Build Something Together</h2>
+      <p class="reveal">Have a project in mind or want to discuss opportunities? We'd love to hear from you.</p>
+      <div class="contact-links reveal-scale">
+        <a href="mailto:ramyakant.dev@gmail.com" class="contact-link">
+          <i class="fas fa-envelope"></i>
+          Email
+        </a>
+        <a href="https://github.com/rks-studio" class="contact-link" target="_blank">
+          <i class="fab fa-github"></i>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© <span id="year">2026</span> RKS Studio. All rights reserved.</p>
+    <p>One person, some apps & endless coffee ☕</p>
+    <div class="social-links">
+      <a href="https://github.com/rks-studio" class="social-link" target="_blank" title="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="mailto:ramyakant.dev@gmail.com" class="social-link" title="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle Functionality
+    function updateThemeIcon(isDark) {
+      const icon = isDark ? '☀️' : '🌙';
+      const desktopBtn = document.getElementById('themeToggleDesktop');
+      const mobileIcon = document.getElementById('themeIconMobile');
+      
+      if (desktopBtn) desktopBtn.textContent = icon;
+      if (mobileIcon) mobileIcon.textContent = icon;
+    }
+
+    function toggleDarkMode() {
+      const isDark = document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', isDark);
+      updateThemeIcon(isDark);
+    }
+
+    // Initialize theme
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedMode = localStorage.getItem('darkMode');
+    
+    if (savedMode === 'true' || (!savedMode && prefersDark)) {
+      document.body.classList.add('dark-mode');
+    }
+    updateThemeIcon(document.body.classList.contains('dark-mode'));
+
+    // Desktop theme toggle
+    document.getElementById('themeToggleDesktop').addEventListener('click', toggleDarkMode);
+    
+    // Mobile theme toggle
+    document.getElementById('themeToggleMobile').addEventListener('click', toggleDarkMode);
+
+    // Mobile Menu Functionality
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        const icon = mobileMenuBtn.querySelector('i');
+        if (icon) {
+          icon.classList.toggle('fa-bars');
+          icon.classList.toggle('fa-times');
+        }
+      });
+
+      // Close menu when clicking a link
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          const icon = mobileMenuBtn.querySelector('i');
+          if (icon) {
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+          }
+        });
+      });
+    }
+
+    // Update year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Particle Field Animation
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouse = { x: null, y: null, radius: 150 };
+    let animationId = null;
+    let isActive = true;
+
+    function resizeCanvas() {
+      const hero = document.querySelector('.hero');
+      if (hero && canvas) {
+        canvas.width = hero.clientWidth;
+        canvas.height = hero.clientHeight;
+      }
+    }
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.baseX = this.x;
+        this.baseY = this.y;
+        this.size = Math.random() * 2 + 1;
+        this.density = Math.random() * 30 + 1;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+      }
+
+      update() {
+        // Gentle floating movement
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Bounce off edges
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+        // Mouse interaction - scatter away
+        if (mouse.x != null && mouse.y != null) {
+          let dx = mouse.x - this.x;
+          let dy = mouse.y - this.y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < mouse.radius) {
+            const forceDirectionX = dx / distance;
+            const forceDirectionY = dy / distance;
+            const force = (mouse.radius - distance) / mouse.radius;
+            const directionX = forceDirectionX * force * this.density * -1;
+            const directionY = forceDirectionY * force * this.density * -1;
+
+            this.x += directionX;
+            this.y += directionY;
+          }
+        }
+      }
+
+      draw() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        ctx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.5)' : 'rgba(19, 91, 236, 0.4)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      const particleCount = window.innerWidth < 768 ? 30 : 60;
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function connectParticles() {
+      const maxDistance = 100;
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      
+      for (let a = 0; a < particles.length; a++) {
+        for (let b = a + 1; b < particles.length; b++) {
+          let dx = particles[a].x - particles[b].x;
+          let dy = particles[a].y - particles[b].y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < maxDistance) {
+            const opacity = (1 - distance / maxDistance) * 0.2;
+            ctx.strokeStyle = isDark 
+              ? `rgba(255, 255, 255, ${opacity})` 
+              : `rgba(19, 91, 236, ${opacity})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animateParticles() {
+      if (!isActive) return;
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+      
+      connectParticles();
+      animationId = requestAnimationFrame(animateParticles);
+    }
+
+    // Initialize
+    if (canvas) {
+      resizeCanvas();
+      initParticles();
+      animateParticles();
+
+      // Event listeners
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+        initParticles();
+      });
+
+      // Mouse move
+      window.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+
+      // Touch move
+      window.addEventListener('touchmove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.touches[0].clientX - rect.left;
+        mouse.y = e.touches[0].clientY - rect.top;
+      }, { passive: true });
+
+      // Reset mouse when leaving
+      window.addEventListener('mouseout', () => {
+        mouse.x = null;
+        mouse.y = null;
+      });
+
+      // Pause when not visible
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          isActive = false;
+          if (animationId) cancelAnimationFrame(animationId);
+        } else {
+          isActive = true;
+          animateParticles();
+        }
+      });
+
+      // Reduced motion support
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        isActive = false;
+        if (animationId) cancelAnimationFrame(animationId);
+      }
+    }
+
+    // Scroll Reveal Animation
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-rotate');
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  </script>
+</body>
+</html>
